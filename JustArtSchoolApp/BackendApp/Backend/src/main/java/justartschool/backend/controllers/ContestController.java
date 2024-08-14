@@ -1,0 +1,80 @@
+package justartschool.backend.controllers;
+
+import justartschool.backend.dtos.ContestDto;
+import justartschool.backend.services.ContestService;
+import justartschool.backend.utils.responses.ApiResponse;
+import justartschool.backend.utils.responses.ResponseUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
+
+@RestController
+@RequestMapping("/api/contests")
+public class ContestController {
+    private final ContestService service;
+
+    @Autowired
+    public ContestController(ContestService service) {
+        this.service = service;
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/getAll")
+    public ResponseEntity<ApiResponse<List<ContestDto>>> getAll() {
+        List<ContestDto> result = null;
+        try {
+            result = service.getAll();
+            return ResponseUtil.createSuccessResponse(result);
+        } catch (Exception ex) {
+            return ResponseUtil.createErrorResponse(ex);
+        }
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/getById/id={id}")
+    public ResponseEntity<ApiResponse<ContestDto>> getById(@PathVariable("id") UUID contestId) {
+        try {
+            ContestDto result = service.getById(contestId);
+            return ResponseUtil.createSuccessResponse(result);
+        } catch (Exception ex) {
+            return ResponseUtil.createErrorResponse(ex);
+        }
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/add")
+    public ResponseEntity<ApiResponse<String>> add(@RequestBody ContestDto contestDto) {
+        try {
+            service.add(contestDto);
+            return ResponseUtil.createSuccessResponse("Ok");
+        } catch (Exception ex) {
+            return ResponseUtil.createErrorResponse(ex);
+        }
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PutMapping("/edit")
+    public ResponseEntity<ApiResponse<String>> edit(@RequestBody ContestDto contestDto) {
+        try {
+            service.edit(contestDto);
+            return ResponseUtil.createSuccessResponse("Ok");
+        } catch (Exception ex) {
+            return ResponseUtil.createErrorResponse(ex);
+        }
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @DeleteMapping("/delete/id={id}")
+    public ResponseEntity<ApiResponse<String>> delete(@PathVariable("id") UUID id) {
+        try {
+            service.delete(id);
+            return ResponseUtil.createSuccessResponse("Ok");
+        } catch (Exception ex) {
+            return ResponseUtil.createErrorResponse(ex);
+        }
+    }
+}
