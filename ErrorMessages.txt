@@ -1,0 +1,9 @@
+throw exceptionProvider.BAD_REQUEST_EXCEPTION("Id parameter is required");
+throw exceptionProvider.NOT_FOUND_EXCEPTION("User with this id doesn't exist.");
+
+
+1. BAD_REQUEST_EXCEPTION
+	-> throw exceptionProvider.BAD_REQUEST_EXCEPTION("Id parameter is required");
+
+2.NOT_FOUND_EXCEPTION
+	->throw exceptionProvider.NOT_FOUND_EXCEPTION("User with this id doesn't exist.");

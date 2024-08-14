@@ -13,19 +13,17 @@ import {Column} from "primereact/column";
 import {OverlayPanel} from "primereact/overlaypanel";
 import useToast from "../../../../utils/hooks/useToast";
 import {Button} from "@mui/material";
-import {FaTrophy} from "react-icons/fa";
 
 function CourseListComponent() {
     const {auth} = useAuth();
     const [courseList, setCourseList] = useState([]);
-    const [rowsPerPageOptions, setRowsPerPageOptions] = useState([3, 5, 10, 15, 20, 25]);
-    const [rowsPerPageOptionSelected, setRowsPerPageOptionSelected] = useState(3);
+    const [rowsPerPageOptions] = useState([3, 5, 10, 15, 20, 25]);
+    const [rowsPerPageOptionSelected] = useState(3);
     const [globalFilterValue, setGlobalFilterValue] = useState('');
     const [filters, setFilters] = useState(null);
     const navigate = useNavigate();
     const overlayPanelRef = useRef(null);
     const [teacherList, setTeacherList] = useState();
-    const {showSuccessToast, showErrorToast, showInfoToast} = useToast();
 
     useEffect(() => {
         if (auth?.userAuthenticated?.token) {

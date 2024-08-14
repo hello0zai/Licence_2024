@@ -109,7 +109,6 @@ const Sidebar = () => {
     };
 
     return (<div style={{minHeight: '100%'}}>
-        {/*is_active_item = {(location.pathname).startsWith(item.path)}*/}
         <IconContext.Provider value={{color: '#b58900'}}>
             <Nav className="navbar navbar-expand-lg bg-dark" data-bs-theme="dark"
                  is_active={sidebarState ? sidebarState.toString() : null}>

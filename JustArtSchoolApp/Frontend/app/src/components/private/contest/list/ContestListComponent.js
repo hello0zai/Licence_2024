@@ -9,22 +9,19 @@ import {BsSearch} from "react-icons/bs";
 import {InputText} from "primereact/inputtext";
 import {DataTable} from "primereact/datatable";
 import {Column} from "primereact/column";
-import useToast from "../../../../utils/hooks/useToast";
 import {format} from 'date-fns';
 import {Button} from "@mui/material";
-import {HiMiniClipboardDocumentCheck} from "react-icons/hi2";
 import {FaTrophy} from "react-icons/fa";
 import routes from "../../../../routes/ArtSchoolRoutes";
 
 function ContestListComponent() {
     const {auth} = useAuth();
     const [contestList, setContestList] = useState([]);
-    const [rowsPerPageOptions, setRowsPerPageOptions] = useState([3, 5, 10, 15, 20, 25]);
-    const [rowsPerPageOptionSelected, setRowsPerPageOptionSelected] = useState(3);
+    const [rowsPerPageOptions] = useState([3, 5, 10, 15, 20, 25]);
+    const [rowsPerPageOptionSelected] = useState(3);
     const [globalFilterValue, setGlobalFilterValue] = useState('');
     const [filters, setFilters] = useState(null);
     const navigate = useNavigate();
-    const {showSuccessToast, showErrorToast, showInfoToast} = useToast();
 
     useEffect(() => {
         if (auth?.userAuthenticated?.token) {
@@ -71,15 +68,20 @@ function ContestListComponent() {
     };
 
     const actionButtons = (rowData) => {
+        const currentDate = new Date().getTime();
+        const disabledButton = new Date(rowData?.startDate).getTime() <= currentDate;
+        // const disabledButton = false;
         return (
             <div className={"d-flex justify-content-start"}>
-                <button className="btn edit-button mx-1" onClick={() => goToEdit(rowData.contestId)}>
+                <button className={`btn edit-button mx-1 ${disabledButton ? 'disabled' : ''}`} onClick={() => goToEdit(rowData.contestId)}
+                        disabled={disabledButton}>
                     <BiSolidEditAlt/>
                 </button>
                 <button className="btn info-button mx-1" onClick={() => goToView(rowData.contestId)}>
                     <AiFillEye/>
                 </button>
-                <button className="btn delete-button mx-1" onClick={() => goToDelete(rowData.contestId)}>
+                <button className={`btn delete-button mx-1 ${disabledButton ? 'disabled' : ''}`} onClick={() => goToDelete(rowData.contestId)}
+                        disabled={disabledButton}>
                     <AiTwotoneDelete/>
                 </button>
             </div>

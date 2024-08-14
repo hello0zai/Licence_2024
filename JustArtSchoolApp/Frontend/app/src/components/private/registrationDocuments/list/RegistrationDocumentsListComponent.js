@@ -5,14 +5,13 @@ import ArtSchoolApi from "../../../../api/art_school_api";
 import routes from "../../../../routes/ArtSchoolRoutes";
 import {FilterMatchMode} from "primereact/api";
 import {BiSolidEditAlt} from "react-icons/bi";
-import {AiTwotoneDelete} from "react-icons/ai";
+import {AiFillEye, AiTwotoneDelete} from "react-icons/ai";
 import {BsSearch} from "react-icons/bs";
 import {InputText} from "primereact/inputtext";
 import {DataTable} from "primereact/datatable";
 import {Column} from "primereact/column";
 import useToast from "../../../../utils/hooks/useToast";
 import {Button} from "@mui/material";
-import {PiMusicNotesPlusLight} from "react-icons/pi";
 import {HiMiniClipboardDocumentCheck} from "react-icons/hi2";
 
 function RegistrationDocumentsListComponent() {
@@ -82,11 +81,21 @@ function RegistrationDocumentsListComponent() {
     const descriptionField = (rowData) => {
         return (
             <div className={"d-flex justify-content-start"}>
-            <textarea
-                value={rowData.description}
-                readOnly
-                style={{width: '100%', height: '100px', resize: 'vertical'}}
-            />
+                <div
+                    style={{
+                        width: '100%',
+                        height: '100px',
+                        overflowY: 'auto',
+                        whiteSpace: 'pre-wrap',
+                        border: '1px solid #fff',
+                        borderRadius: '10px',
+                        boxShadow: '0 8px 8px 1px #031a21',
+                        padding: '5px'
+                    }}
+                    readOnly
+                >
+                    {rowData.description}
+                </div>
             </div>
         );
     };
@@ -126,7 +135,7 @@ function RegistrationDocumentsListComponent() {
     };
 
     const goToAdd = function () {
-      navigate(routes.adminRoutes.RegistrationDocumentsAddComponent.path, {replace: true});
+        navigate(routes.adminRoutes.RegistrationDocumentsAddComponent.path, {replace: true});
     };
 
     return (
@@ -156,7 +165,8 @@ function RegistrationDocumentsListComponent() {
 
                     <Column header="Acțiuni" body={actionButtons}></Column>
                     <Column field="documentName" sortable header="Denumire document"></Column>
-                    <Column field="description" sortable header="Descriere" style={{width: '600px'}}></Column>
+                    <Column field="description" sortable header="Descriere" body={descriptionField}
+                            style={{maxWidth: '600px'}}></Column>
                     <Column field="mandatory" header="Obligatoriu" body={mandatoryBody}></Column>
                 </DataTable>
             </div>

@@ -4,7 +4,6 @@ import {useNavigate} from "react-router-dom";
 import routes from "../routes/ArtSchoolRoutes";
 import {Field, Form, Formik} from "formik";
 import {Button, Stack} from "@mui/material";
-import useToast from "../utils/hooks/useToast";
 
 function RegistrationDocumentForm(config) {
     const model = config.model;

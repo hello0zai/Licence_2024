@@ -449,8 +449,26 @@ img.bg-dark {
     box-shadow: 0 8px 8px 1px #031a21 !important;
 }
 
+.dialog-backdrop {
+    backdrop-filter: blur(2px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(19, 19, 19, 0.5);
+    z-index: 999;
+}
 
 /*Buttons*/
+.delete-button.disabled {
+    background-color:#8d0512 !important;
+    border: 1px solid #8d0512 !important;
+    box-shadow: 0 5px 8px 1px #031a21 !important;
+    color: white !important;
+    opacity:70% !important;
+}
+
 .delete-button,
 .p-button.p-component.p-button-icon-only.p-button-text.p-button-rounded.p-button-danger {
     background-color: #e32636 !important;
@@ -479,6 +497,14 @@ img.bg-dark {
     border: 1px solid #916e00 !important;
     box-shadow: 0 8px 8px 1px #031a21 !important;
     color: white !important;
+}
+
+.edit-button.disabled {
+    background-color: #916e00 !important;
+    border: 1px solid #916e00 !important;
+    box-shadow: 0 8px 8px 1px #031a21 !important;
+    color: white !important;
+    opacity:70% !important;
 }
 
 .info-button {
@@ -892,11 +918,6 @@ a.link {
     background-color: #916e00 !important;
 }
 
-
-/*.react-datepicker__month-text--keyboard-selected,*/
-/*.react-datepicker__quarter-text--keyboard-selected,*/
-/*.react-datepicker__year-text--keyboard-selected*/
-
 .react-datepicker__month {
     background-color: var(--bs-body-bg) !important;
     color: #fff !important;
@@ -913,4 +934,55 @@ a.link {
 
 .react-datepicker__close-icon::after {
     background-color: var(--bs-body-bg) !important;
+}
+
+
+.logout-dialog {
+    border-radius: 10px;
+}
+
+.logout-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+.logout-icon {
+    color: #e32636 !important;
+}
+
+.logout-title {
+    margin: 10px 0 5px;
+    font-size: 24px;
+    color: white;
+}
+
+.logout-question {
+    margin: 0;
+    color: #ccc;
+}
+
+.logout-button-no {
+    background-color: transparent !important;
+    color: #e32636  !important;
+    border: 2px solid #e32636  !important;
+    margin-right: 10px !important;
+}
+
+.logout-button-yes {
+    background-color: transparent !important;
+    color: #b58900  !important;
+    border: 2px solid #b58900  !important;
+}
+
+.logout-button-no:hover {
+    background-color: #e32636  !important;
+    color: white !important;
+}
+
+.logout-button-yes:hover {
+    background-color: #b58900 !important;
+    color: white !important;
 }

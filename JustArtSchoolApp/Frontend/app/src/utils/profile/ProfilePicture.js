@@ -83,10 +83,11 @@ function ProfilePicture({profilePicture, setProfilePicture}) {
             ></BiSolidUserCircle>
         }
 
-        <div className="">
-            <div className={"card bg-dark"}>
+        <div className={`${imageCrop ? 'dialog-backdrop' : ''}`}>
+            <div className={`card bg-dark`}>
                 <Dialog className={"bg-dark"} visible={imageCrop}
                         onHide={() => setImageCrop(false)}
+                        dismissableMask={true}
                 >
                     <Card className={"col-md-12"} footer={footer} header={header}>
                         <div className={"confirmation-content flex flex-column align-items-center"}>

@@ -4,7 +4,6 @@ import {Dialog} from "primereact/dialog";
 import {Card} from "primereact/card";
 import {IoWarning} from "react-icons/io5";
 import {BsInfoCircleFill} from "react-icons/bs";
-import useAuth from "../../../../../utils/hooks/useAuth";
 import {FileUpload} from "primereact/fileupload";
 import useToast from "../../../../../utils/hooks/useToast";
 import {FaFilePdf} from "react-icons/fa";
@@ -48,7 +47,7 @@ function UploadDocuments(config) {
                                 disabled={readOnly}
                                 uploadHandler={(event) => uploadStudentDocument(event, firstDocumentInfo)}
                                 onBeforeDrop={(event) => dropHandler(event)}
-                                onRemove = {(event) => removeHandler(event,firstDocumentInfo)}
+                                onRemove={(event) => removeHandler(event, firstDocumentInfo)}
                                 chooseOptions={chooseOptions}
                                 chooseLabel="Alege fișier"
                                 uploadLabel="Încarcă"
@@ -69,7 +68,7 @@ function UploadDocuments(config) {
                             disabled={readOnly}
                             uploadHandler={(event) => uploadStudentDocument(event, secondDocumentInfo)}
                             onBeforeDrop={(event) => dropHandler(event)}
-                            onRemove = {(event) => removeHandler(event,secondDocumentInfo)}
+                            onRemove={(event) => removeHandler(event, secondDocumentInfo)}
                             chooseOptions={chooseOptions}
                             chooseLabel="Alege fișier"
                             uploadLabel="Încarcă"
@@ -123,13 +122,14 @@ function UploadDocuments(config) {
                     <Button icon={<BsInfoCircleFill/>}
                             onClick={() => setVisibleDocumentsInfo(true)}/>
                 </div>
-                <div>
+                <div className={`${visibleDocumentsInfo ? 'dialog-backdrop' : ''}`}>
                     <Dialog className={"bg-dark"} visible={visibleDocumentsInfo}
                             onHide={() => setVisibleDocumentsInfo(false)} style={{
                         border: '4px solid #031a21',
                         maxHeight: '40rem',
                         boxShadow: '0 12px 8px 1px #031a21'
                     }}
+                            dismissableMask={true}
                     >
                         <Card className={"col-md-12"} footer={footer} header={header}>
                             <div className={"confirmation-content flex flex-column align-items-center"}>
